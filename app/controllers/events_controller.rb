@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
     def index
-        @events = Event.order("#{sort_params.fetch(:by)} #{sort_params.fetch(:order)}")
+        @events = Event.where('date >= ?', Date.today).order("#{sort_params.fetch(:by)} #{sort_params.fetch(:order)}")
         render json: @events
     end
 

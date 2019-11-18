@@ -23,10 +23,10 @@ Liste des évènements qui ont été créés :
 
 - [OK] Afficher une liste des évènements avec toutes leurs caractéristiques
 - [OK] Les évènement dont la date est dans les 10 prochains jours, doivent avoir leur titre affiché en rouge
-- Les évènements dont la date est déjà passée ne doivent pas être affichés
+- [OK] Les évènements dont la date est déjà passée ne doivent pas être affichés
 - 2 possibilité pour trier les évènements :
-. Tri par date des évènements
-. Tri par date de création des évènements
+. [OK] Tri par date des évènements
+. [OK] Tri par date de création des évènements
 
 ## Précisions utiles
 

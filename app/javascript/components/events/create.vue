@@ -73,7 +73,7 @@ export default {
 
       return createEvent(this.event).then((result) => {
         console.log(result)
-        return this.$router.push({ path: '/events' })
+        return this.$router.push({ path: '/events', query: { sort_by: 'date', sort_order: 'asc' } })
       })
       .catch((err) => this.errors.push(error.message))
     }
