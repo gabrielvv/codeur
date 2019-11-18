@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-const getEvents = () => axios.get('/api/events', { responseType: 'json '}).then(({ data }) => (data || []))
+const getEvents = (params) => axios.get('/api/events', {
+    responseType: 'json',
+    params: { ...params.sort }
+}).then(({
+    data
+}) => (data || []))
 
 const createEvent = (event) => axios.post('/api/events', event)
 

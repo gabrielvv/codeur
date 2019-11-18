@@ -1,12 +1,21 @@
 <template>
   <div class="events">
-    <div v-if="loading" class="loading">
-      Loading...
-    </div>
+    <router-link v-if="sort.order === 'desc'" to="/events?sort_by=date&sort_order=asc">
+      <button>Date:asc</button>
+    </router-link>
+    <router-link v-else to="/events?sort_by=date&sort_order=desc">
+      <button>Date:desc</button>
+    </router-link>
+    <router-link v-if="sort.order === 'desc'" to="/events?sort_by=created_at&sort_order=asc">
+      <button>Creation:asc</button>
+    </router-link>
+    <router-link v-else to="/events?sort_by=created_at&sort_order=desc">
+      <button>Creation:desc</button>
+    </router-link>
 
-     <div v-if="error" class="error">
-      {{ error }}
-    </div>
+    <div v-if="loading" class="loading">Loading...</div>
+
+    <div v-if="error" class="error">{{ error }}</div>
 
     <div v-if="events" class="content">
       <div v-for="event in events" v-bind:key="event.id">
@@ -20,39 +29,45 @@
 </template>
 
 <script>
-import { getEvents } from '../../api'
-import { isWithinNextXDays } from '../../utils'
+import { getEvents } from "../../api";
+import { isWithinNextXDays } from "../../utils";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       loading: false,
       events: null,
       error: null
-    }
+    };
   },
-  created () {
-    this.fetchData()
+  created() {
+    this.fetchData();
   },
   watch: {
     // call again the method if the route changes
-    '$route': 'fetchData'
+    $route: "fetchData"
   },
   methods: {
     isWithinNextXDays,
-    fetchData () {
-      this.error = this.post = null
-      this.loading = true
+    fetchData() {
+      this.sort = {
+        by: this.$route.query.sort_by,
+        order: this.$route.query.sort_order
+      };
+      this.error = this.post = null;
+      this.loading = true;
       // replace `getPost` with your data fetching util / API wrapper
-      return getEvents()
-        .then((events) => {
-          this.loading = false
-          this.events = events
+      return getEvents({
+        sort: this.sort
+      })
+        .then(events => {
+          this.loading = false;
+          this.events = events;
         })
-        .catch(err => this.error = err.toString())
+        .catch(err => (this.error = err.toString()));
     }
   }
-}
+};
 </script>
 
 <style scoped>

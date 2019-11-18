@@ -4,8 +4,8 @@
 
 Affiche 2 liens ou boutons :
 
-- Lien vers la page "Ajouter un évènement"
-- Lien vers la page "Voir les événements"
+- [OK] Lien vers la page "Ajouter un évènement"
+- [OK] Lien vers la page "Voir les événements"
 
 ## Page "Ajouter un évènement"
 
