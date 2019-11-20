@@ -50,7 +50,7 @@ input {
 }
 
 .input__field {
-  font-size: 1.2em;
+  font-size: 1em;
   outline: none;
   border: solid;
   padding: 0.5rem;
