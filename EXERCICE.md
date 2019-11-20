@@ -11,11 +11,11 @@ Affiche 2 liens ou boutons :
 
 Formulaire permettant d'ajouter des évènements en base de données :
 
-- Nom de l'évènement
-- Date de l'évènement
-- Description (300 caractères max)
-- Email de l’organisateur (valider que c’est bien un email)
-- Note : Tous les champs sont obligatoires et doivent être valides
+- [OK] Nom de l'évènement
+- [OK] Date de l'évènement
+- [OK] Description (300 caractères max)
+- [OK] Email de l’organisateur (valider que c’est bien un email)
+- [OK] Note : Tous les champs sont obligatoires et doivent être valides
 
 ## Page "Voir les événements"
 
@@ -35,8 +35,8 @@ Liste des évènements qui ont été créés :
 
 Restitution de l'exercice :
 
-- L'app hébergée sur une instance gratuite de type Heroku
-- L'app peut être codée si possible en Vue et/ou Rails, mais sinon en n'importe quel langage.
+- [OK] L'app hébergée sur une instance gratuite de type Heroku
+- [OK] L'app peut être codée si possible en Vue et/ou Rails, mais sinon en n'importe quel langage.
 
 À ta dispo pour toutes questions,
 

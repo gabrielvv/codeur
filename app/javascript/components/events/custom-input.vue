@@ -35,6 +35,10 @@ export default {
   color: var(--color-textlink);
 }
 
+.input__field[required] + .input__label::after {
+  content: '*';
+}
+
 .input {
   margin-bottom: 20px;
   padding-top: 25px;
