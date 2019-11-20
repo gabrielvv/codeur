@@ -2,8 +2,8 @@
 <div class="container">
   <form id="event-creation"
     @submit="checkForm">
-    <p v-if="errors.length">
-      <b>Please correct the following error(s):</b>
+    <p class="errors" v-if="errors.length">
+      <b>Veuillez corriger les erreurs suivantes:</b>
       <ul>
         <li v-for="error in errors" v-bind:key="error.msg">{{ error }}</li>
       </ul>    
@@ -12,7 +12,7 @@
     <CustomInput>
       <template v-slot:name>Nom</template>
       <template v-slot:input>
-        <input class="input__field input__field--chisato" v-model="event.name" min="5" type="text" name="name" id="name" required/>
+        <input class="input__field input__field--chisato" v-model="event.name" minlength="5" type="text" name="name" id="name" required/>
       </template>
     </CustomInput>
 
@@ -33,14 +33,22 @@
     <CustomInput>
       <template v-slot:name>Description</template>
       <template v-slot:input>
-        <textarea class="input__field input__field--chisato" v-model="event.description" name="description" id="description" required/>
+        <textarea 
+          class="input__field input__field--chisato" 
+          v-model="event.description" 
+          name="description" 
+          id="description"
+          rows="5"
+          cols="33" 
+          maxlength="300"
+          required/>
       </template>
     </CustomInput>
 
     <p>
       <button
         type="submit"
-      >Soumettre
+      >Enregistrer
       </button>
     </p>
   </form>
@@ -108,5 +116,24 @@ export default {
   margin: 0;
   padding: 2rem;
   flex: 1;
+}
+
+button {
+  background-color: var(--color-bg);
+  font-size: 1em;
+  outline: none;
+  border: solid;
+  padding: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #000;
+  color: var(--color-bg);
+}
+
+.errors li {
+  list-style: none;
 }
 </style>

@@ -6,7 +6,7 @@
 
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div v-if="events" class="content">
+    <div v-if="events && !loading" class="content">
       <EventCard v-for="event in events" v-bind:key="event.id" v-bind:event="event" />
     </div>
 
@@ -70,7 +70,7 @@ export default {
       this.loading = true;
 
       // Simulate network latency
-      return new Promise(resolve => setTimeout(resolve, 2000))
+      return new Promise(resolve => setTimeout(resolve, 500))
         .then(() => getEvents({
           sort: this.sort
         }))
@@ -89,7 +89,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex: 1;
-  background: #fff;
+  background: var(--color-bg);
   margin: 0;
   padding: 2rem 1rem;
 }
@@ -97,7 +97,7 @@ export default {
 select {
   border: none;
   text-transform: uppercase;
-  background-color: #fff;
+  background-color: var(--color-bg);
 }
 
 .content {
