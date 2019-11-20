@@ -12,12 +12,14 @@ import VueRouter from 'vue-router'
 import App from '../app.vue'
 import Events from '../components/events/list.vue'
 import CreateEvent from '../components/events/create.vue'
+import Home from '../components/home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/events', component: Events },
   { path: '/events/new', component: CreateEvent },
+  { path: '*', component: Home },
 ]
 
 const router = new VueRouter({

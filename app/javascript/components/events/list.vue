@@ -1,16 +1,17 @@
 <template>
   <div class="events container">
+    <triangle v-if="!loading && isEmpty" />
     <div v-if="loading" class="loading">
       <grid-loader :loading="loading" color="black" size="10px"></grid-loader>
     </div>
 
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div v-if="events && !loading" class="content">
+    <div v-if="!loading && !isEmpty" class="content">
       <EventCard v-for="event in events" v-bind:key="event.id" v-bind:event="event" />
     </div>
 
-    <div class="footer">
+    <div class="footer" v-if="!isEmpty">
       <select v-model="sortBy" name="sortBy" id="sort-by">
         <option value="date">Date</option>
         <option value="created_at">Création</option>
@@ -26,22 +27,29 @@
 <script>
 import { getEvents } from "../../api";
 import EventCard from "./card";
-import GridLoader from 'vue-spinner/src/GridLoader.vue'
+import GridLoader from "vue-spinner/src/GridLoader.vue";
+import Triangle from "../decoration/triangle";
 
 export default {
   components: {
     EventCard,
-    GridLoader
+    GridLoader,
+    Triangle
   },
   data: function() {
     return {
       sortBy: this.$route.query.sortBy || "date",
       sortOrder: this.$route.query.sortOrder || "asc",
       loading: false,
-      loaderColor: 'black',
-      events: null,
+      loaderColor: "black",
+      events: [],
       error: null
     };
+  },
+  computed: {
+    isEmpty() {
+      return this.events.length === 0;
+    }
   },
   created() {
     this.fetchData();
@@ -71,9 +79,11 @@ export default {
 
       // Simulate network latency
       return new Promise(resolve => setTimeout(resolve, 500))
-        .then(() => getEvents({
-          sort: this.sort
-        }))
+        .then(() =>
+          getEvents({
+            sort: this.sort
+          })
+        )
         .then(events => {
           this.loading = false;
           this.events = events;
@@ -85,6 +95,7 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
   display: flex;
   flex-direction: column;
