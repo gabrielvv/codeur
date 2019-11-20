@@ -31,11 +31,12 @@ h3 {
 
 .event-description {
   margin-bottom: 1em;
+  overflow: hidden;
 }
 
 .event-date--container {
   position: absolute;
-  top: 10px;
+  top: 25px;
   left: -30px;
 }
 .event-date {
@@ -57,12 +58,14 @@ h3 {
 .event-card {
   flex: 1;
   display: inline-block;
-  margin-right: 5rem;
-  margin-left: 1rem;
-  margin-bottom: 10rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 5rem;
   padding: 1rem;
   border: solid #2f3238 5px;
   position: relative;
+  height: 240px;
+  min-width: 200px;
 }
 
 .event-email {

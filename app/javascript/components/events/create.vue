@@ -88,7 +88,7 @@ export default {
 
       return createEvent(this.event).then((result) => {
         console.log(result)
-        return this.$router.push({ path: '/events', query: { sort_by: 'date', sort_order: 'asc' } })
+        return this.$router.push({ path: '/events', query: { sortBy: 'date', sortOrder: 'asc' } })
       })
       .catch((err) => this.errors.push(error.message))
     }
@@ -97,37 +97,6 @@ export default {
 </script>
 
 <style scoped>
-/* button {
-  background-color: var(--color-textlink);
-  color: #fff;
-  border: none;
-  outline: none;
-  font-size: 150%;
-  cursor: pointer;
-}
-
-input, textarea {
-  font-size: 100%;
-  outline: none;
-}
-
-#event-creation {
-  background: #2f3238;
-  color: #fff;
-  margin: 0;
-  padding: 2rem;
-  flex: 1;
-}
-
-.fill-in { 
-  flex: 1;
-  background: #6C6C6C;
-}
-
-textarea {
-  outline: none;
-  border: solid var(--color-textlink) 2px;
-} */
 
 .container {
   display: flex;

@@ -1,6 +1,8 @@
 <template>
   <div class="events container">
-    <div v-if="loading" class="loading">Loading...</div>
+    <div v-if="loading" class="loading">
+      <grid-loader :loading="loading" color="black" size="10px"></grid-loader>
+    </div>
 
     <div v-if="error" class="error">{{ error }}</div>
 
@@ -9,18 +11,14 @@
     </div>
 
     <div class="footer">
-      <router-link v-if="sort.order === 'desc'" to="/events?sort_by=date&sort_order=asc">
-        <button>Date:asc</button>
-      </router-link>
-      <router-link v-else to="/events?sort_by=date&sort_order=desc">
-        <button>Date:desc</button>
-      </router-link>
-      <router-link v-if="sort.order === 'desc'" to="/events?sort_by=created_at&sort_order=asc">
-        <button>Creation:asc</button>
-      </router-link>
-      <router-link v-else to="/events?sort_by=created_at&sort_order=desc">
-        <button>Creation:desc</button>
-      </router-link>
+      <select v-model="sortBy" name="sortBy" id="sort-by">
+        <option value="date">Date</option>
+        <option value="created_at">Création</option>
+      </select>
+      <select v-model="sortOrder" name="sortOrder" id="sort-order">
+        <option value="asc">Croissant</option>
+        <option value="desc">Décroissant</option>
+      </select>
     </div>
   </div>
 </template>
@@ -28,14 +26,19 @@
 <script>
 import { getEvents } from "../../api";
 import EventCard from "./card";
+import GridLoader from 'vue-spinner/src/GridLoader.vue'
 
 export default {
   components: {
-    EventCard
+    EventCard,
+    GridLoader
   },
   data: function() {
     return {
+      sortBy: this.$route.query.sortBy || "date",
+      sortOrder: this.$route.query.sortOrder || "asc",
       loading: false,
+      loaderColor: 'black',
       events: null,
       error: null
     };
@@ -45,20 +48,32 @@ export default {
   },
   watch: {
     // call again the method if the route changes
-    $route: "fetchData"
+    $route: "fetchData",
+    sortBy: "sort",
+    sortOrder: "sort"
   },
   methods: {
+    sort() {
+      return this.$router.push({
+        query: {
+          sortBy: this.sortBy,
+          sortOrder: this.sortOrder
+        }
+      });
+    },
     fetchData() {
       this.sort = {
-        by: this.$route.query.sort_by,
-        order: this.$route.query.sort_order
+        by: this.$route.query.sortBy,
+        order: this.$route.query.sortOrder
       };
       this.error = this.post = null;
       this.loading = true;
-      // replace `getPost` with your data fetching util / API wrapper
-      return getEvents({
-        sort: this.sort
-      })
+
+      // Simulate network latency
+      return new Promise(resolve => setTimeout(resolve, 2000))
+        .then(() => getEvents({
+          sort: this.sort
+        }))
         .then(events => {
           this.loading = false;
           this.events = events;
@@ -76,7 +91,13 @@ export default {
   flex: 1;
   background: #fff;
   margin: 0;
-  padding: 2rem;
+  padding: 2rem 1rem;
+}
+
+select {
+  border: none;
+  text-transform: uppercase;
+  background-color: #fff;
 }
 
 .content {
@@ -87,5 +108,15 @@ export default {
 
 .footer {
   flex: 1;
+  position: absolute;
+  top: -2.5rem;
+  right: 2.8rem;
+  outline: none;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }
 </style>

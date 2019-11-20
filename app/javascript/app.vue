@@ -7,7 +7,7 @@
       </h2>
       <nav class="menu">
         <router-link
-          to="/events?sort_by=date&sort_order=desc"
+          to="/events?sortBy=date&sortOrder=desc"
           class="menu__item"
           active-class="menu__item--current"
         >liste</router-link>
@@ -63,7 +63,7 @@ a {
   flex-wrap: wrap;
   justify-content: space-between;
   z-index: 1000;
-  max-width: 23rem;
+  max-width: 12rem;
   grid-area: menu;
 }
 
