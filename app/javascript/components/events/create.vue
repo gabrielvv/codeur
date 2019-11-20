@@ -1,4 +1,5 @@
 <template>
+<div class="container">
   <form id="event-creation"
     @submit="checkForm">
     <p v-if="errors.length">
@@ -8,40 +9,54 @@
       </ul>    
     </p>
 
-    <p>
-      <label for="name">Nom</label>
-      <input v-model="event.name" min="5" type="text" name="name" id="name" required/>
-    </p>
+    <CustomInput>
+      <template v-slot:name>Nom</template>
+      <template v-slot:input>
+        <input class="input__field input__field--chisato" v-model="event.name" min="5" type="text" name="name" id="name" required/>
+      </template>
+    </CustomInput>
+
+    <CustomInput>
+      <template v-slot:name>Date</template>
+      <template v-slot:input>
+        <input class="input__field input__field--chisato" type="date" name="date" id="date" v-model="event.date" required/>  
+      </template>
+    </CustomInput>
+
+    <CustomInput>
+      <template v-slot:name>Email</template>
+      <template v-slot:input>
+      <input class="input__field input__field--chisato" type="email" name="email" id="email" v-model="event.email" required/>
+      </template>
+    </CustomInput>
+
+    <CustomInput>
+      <template v-slot:name>Description</template>
+      <template v-slot:input>
+        <textarea class="input__field input__field--chisato" v-model="event.description" name="description" id="description" required/>
+      </template>
+    </CustomInput>
 
     <p>
-      <label for="description">Description</label>
-      <textarea v-model="event.description" name="description" id="description" required/>
-    </p>
-
-    <p>
-      <label for="date">Date</label>
-      <input type="date" name="date" id="date" v-model="event.date" required/>
-    </p>
-
-     <p>
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" v-model="event.email" required/>
-    </p>
-
-    <p>
-      <input
+      <button
         type="submit"
-        value="Submit"
-      />
+      >Soumettre
+      </button>
     </p>
   </form>
+  <div class="fill-in"></div>
+</div>
 </template>
 
 <script>
 import capitalize from 'lodash/capitalize';
 import { createEvent } from '../../api'
+import CustomInput from './custom-input'
 
 export default {
+  components: {
+    CustomInput
+  },
   data: function () {
     return {
       errors: [],
@@ -82,4 +97,47 @@ export default {
 </script>
 
 <style scoped>
+/* button {
+  background-color: var(--color-textlink);
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 150%;
+  cursor: pointer;
+}
+
+input, textarea {
+  font-size: 100%;
+  outline: none;
+}
+
+#event-creation {
+  background: #2f3238;
+  color: #fff;
+  margin: 0;
+  padding: 2rem;
+  flex: 1;
+}
+
+.fill-in { 
+  flex: 1;
+  background: #6C6C6C;
+}
+
+textarea {
+  outline: none;
+  border: solid var(--color-textlink) 2px;
+} */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#event-creation {
+  margin: 0;
+  padding: 2rem;
+  flex: 1;
+}
 </style>

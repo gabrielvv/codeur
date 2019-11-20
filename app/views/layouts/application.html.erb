@@ -7,6 +7,32 @@
 
     <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application' %>
+    <style>
+    *, *::after, *::before {
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      --color-text: #000;
+      --color-alt: #ccc;
+      --color-bg: #fff;
+      --color-link: #000;
+      --color-link-hover: #000;
+      --color-info: #000;
+      --color-textlink: #f73378;
+      font-family: Futura, "futura-pt", sans-serif;
+      min-height: 100vh;
+      color: #57585c;
+      color: var(--color-text);
+      background-color: #fff;
+      background-color: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    </style>
   </head>
 
   <body>

@@ -10,7 +10,6 @@ import axios from 'axios'
 import VueRouter from 'vue-router'
 
 import App from '../app.vue'
-import Home from '../components/home.vue'
 import Events from '../components/events/list.vue'
 import CreateEvent from '../components/events/create.vue'
 
@@ -19,7 +18,6 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/events', component: Events },
   { path: '/events/new', component: CreateEvent },
-  { path: '*', component: Home }
 ]
 
 const router = new VueRouter({
