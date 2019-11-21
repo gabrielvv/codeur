@@ -32,6 +32,7 @@ h3 {
 .event-description {
   margin-bottom: 1em;
   overflow: hidden;
+  height: 150px;
 }
 
 .event-date--container {
