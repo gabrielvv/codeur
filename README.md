@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## TODO
+
+* pagination
+* default limit of results
+* add an ellipsis to overflowing description in event-card
